@@ -1,11 +1,6 @@
 <?php
 
 // HerokuのDATABASE_URL環境変数をパースする
-if (class_exists('\ItsDamien\Heroku\Config\Parse')) {
-    new \ItsDamien\Heroku\Config\Parse();
-}
-
-// HerokuのDATABASE_URL環境変数をパースする
 $url = parse_url(env("DATABASE_URL"));
 
 $host     = $url["host"];
