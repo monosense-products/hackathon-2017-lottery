@@ -47,6 +47,11 @@
             });
         });
     </script>
+    <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+    <script>
+        var pusher = new Pusher("{{ env('PUSHER_KEY') }}");
+    </script>
+    <script src="js/pusher.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
     @yield('scripts')
