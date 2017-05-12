@@ -1,9 +1,10 @@
 {
   "name": "hackathon-2017-lottery",
   "scripts": {
-    "postdeploy": "php artisan migrate --force"
+    "postdeploy": "php artisan migrate"
   },
   "env": {
+    "APP_ENV": "staging",
     "APP_KEY": {
       "required": true
     },
