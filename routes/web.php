@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource("lotteries","LotteryController");
+Route::resource("prizes","PrizeController");
+Route::resource("grades","GradeController");
+Route::resource("lottery_specs","LotterySpecController");
+Route::resource("skus","SkuController");
