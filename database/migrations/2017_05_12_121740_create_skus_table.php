@@ -14,9 +14,13 @@ class CreateSkusTable extends Migration {
 	{
 		Schema::create('skus', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('lotteryId');
-            $table->integer('gradeId');
-            $table->string('imageCode');
+            $table->string('name');
+            $table->string('image_code');
+            $table->integer('lottery_id')->unsigned();
+            $table->integer('grade_id')->unsigned();
+
+            $table->foreign('lottery_id')->references('id')->on('lotteries');
+            $table->foreign('grade_id')->references('id')->on('grades');
 
             $table->timestamps();
         });

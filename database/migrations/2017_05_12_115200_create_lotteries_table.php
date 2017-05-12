@@ -15,8 +15,8 @@ class CreateLotteriesTable extends Migration {
 		Schema::create('lotteries', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->dateTime('openTime');
-            $table->dateTime('closeTime');
+            $table->dateTime('open_time');
+            $table->dateTime('close_time');
             $table->enum('status',['close', 'open']);
             
             $table->timestamps();

@@ -14,8 +14,10 @@ class CreateLotterySpecsTable extends Migration {
 	{
 		Schema::create('lottery_specs', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('lotteryId');
-            $table->integer('lotPrice');
+            $table->integer('lot_price');
+            $table->integer('lottery_id')->unsigned();
+
+            $table->foreign('lottery_id')->references('id')->on('lotteries');
 
             $table->timestamps();
         });

@@ -14,11 +14,13 @@ class CreatePrizesTable extends Migration {
 	{
 		Schema::create('prizes', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('lotteryId');
-            $table->integer('gradeId');
             $table->enum('status', ['on_sale', 'sold']);
-            
+            $table->integer('lottery_id')->unsigned();
+            $table->integer('sku_id')->unsigned();
+
+            $table->foreign('lottery_id')->references('id')->on('lotteries');
+            $table->foreign('sku_id')->references('id')->on('skus');
+
             $table->timestamps();
         });
 	}

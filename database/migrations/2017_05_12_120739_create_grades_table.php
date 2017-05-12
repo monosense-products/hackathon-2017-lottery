@@ -16,6 +16,7 @@ class CreateGradesTable extends Migration {
             $table->increments('id');
             $table->string('name');
             $table->integer('rank');
+            $table->boolean('last_one_flag')->default(false);
 
             $table->timestamps();
         });
