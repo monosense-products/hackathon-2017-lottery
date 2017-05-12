@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "76036da3b5b55b91dbe1e1affa01bf9e",
+    "content-hash": "9ba4322a0f40605f15c3203ebd870ef1",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -159,6 +159,54 @@
                 "string"
             ],
             "time": "2015-11-06T14:35:42+00:00"
+        },
+        {
+            "name": "itsdamien/laravel-heroku-config-parser",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itsDamien/laravel-heroku-config-parser.git",
+                "reference": "95b57d9b5548a56bd43a147f36d2ae454a1e77c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itsDamien/laravel-heroku-config-parser/zipball/95b57d9b5548a56bd43a147f36d2ae454a1e77c2",
+                "reference": "95b57d9b5548a56bd43a147f36d2ae454a1e77c2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ItsDamien\\Heroku\\Config\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien Criado",
+                    "email": "its@damien.is"
+                }
+            ],
+            "description": "Parse Heroku config vars like DATABASE_URL or REDIS_URL to work with Laravel.",
+            "keywords": [
+                "database",
+                "env",
+                "heroku",
+                "laravel",
+                "redis"
+            ],
+            "time": "2017-03-06T15:58:40+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
