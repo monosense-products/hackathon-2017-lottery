@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post("lotteries/confirm","LotteryController@confirm");
+Route::post("lotteries/purchase","LotteryController@purchase");
 Route::resource("lotteries","LotteryController");
+
 Route::resource("prizes","PrizeController");
 Route::resource("grades","GradeController");
 Route::resource("lottery_specs","LotterySpecController");

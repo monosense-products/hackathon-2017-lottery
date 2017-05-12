@@ -40,7 +40,7 @@ class LotteryController extends Controller {
 	{
 		$lottery = new Lottery();
 
-		
+
 
 		$lottery->save();
 
@@ -84,7 +84,7 @@ class LotteryController extends Controller {
 	{
 		$lottery = Lottery::findOrFail($id);
 
-		
+
 
 		$lottery->save();
 
@@ -103,6 +103,20 @@ class LotteryController extends Controller {
 		$lottery->delete();
 
 		return redirect()->route('lotteries.index')->with('message', 'Item deleted successfully.');
+	}
+
+	public function confirm()
+	{
+		$lotteries = Lottery::orderBy('id', 'desc')->paginate(10);
+
+		return view('lotteries.confirm', compact('lotteries'));
+	}
+
+	public function purchase()
+	{
+		$lotteries = Lottery::orderBy('id', 'desc')->paginate(10);
+
+		return view('lotteries.purchase', compact('lotteries'));
 	}
 
 }
