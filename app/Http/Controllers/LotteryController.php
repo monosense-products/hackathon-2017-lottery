@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Grade;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -53,12 +54,13 @@ class LotteryController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		$lottery = Lottery::findOrFail($id);
+    public function show($id)
+    {
+        $lottery = Lottery::findOrFail($id);
+        $grades = Grade::all()->sortBy('rank');
 
-		return view('lotteries.show', compact('lottery'));
-	}
+        return view('lotteries.show', compact('lottery', 'grades'));
+    }
 
 	/**
 	 * Show the form for editing the specified resource.

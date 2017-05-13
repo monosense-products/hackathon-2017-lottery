@@ -10,7 +10,7 @@ class PrizeTableSeeder extends Seeder
 
     public function run()
     {
-        $sku = \App\Sku::lastOnes()->where('lottery_id', 1)->first();
+        $sku = \App\Sku::all()->where('lottery_id', 1)->first();
         \App\Prize::create([
             'status'     => 'on_sale',
             'lottery_id' => 1,

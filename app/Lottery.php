@@ -60,6 +60,30 @@ class Lottery extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lotterySpec()
+    {
+        return $this->hasOne('App\LotterySpec');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function skus()
+    {
+        return $this->hasMany('App\Sku');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function prizes()
+    {
+        return $this->hasMany('App\Prize');
+    }
+
+    /**
      * @param int $n number of drawing lots
      *
      * @return \Illuminate\Database\Eloquent\Collection

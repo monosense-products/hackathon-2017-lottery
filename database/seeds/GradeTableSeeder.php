@@ -13,8 +13,6 @@ class GradeTableSeeder extends Seeder
         DB::table('grades')->insert([
             'name' => 'ラストワン賞',
             'rank' => 1,
-
-            'last_one_flag' => true,
         ]);
         DB::table('grades')->insert([
             'name' => 'A賞',
