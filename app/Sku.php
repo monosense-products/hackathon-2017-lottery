@@ -25,5 +25,33 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Sku extends Model
 {
-    //
+    // FIXME: Sku -> SKU
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function grade()
+    {
+        return $this->belongsTo('App\Grade');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function prizes()
+    {
+        return $this->hasMany('App\Prize');
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLastOnes($query)
+    {
+        $relation = 'grade';
+        return $query->with($relation)->whereHas($relation, function ($query) {
+            return $query->lastOnes();
+        });
+    }
 }

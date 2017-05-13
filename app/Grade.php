@@ -21,5 +21,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Grade extends Model
 {
-    //
+    /**
+     * @return boolean
+     */
+    public function is_last_one()
+    {
+        return $this->last_one_flag;
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLastOnes($query)
+    {
+        return $query->where('last_one_flag', true);
+    }
 }
