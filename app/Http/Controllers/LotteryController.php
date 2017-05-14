@@ -59,7 +59,7 @@ class LotteryController extends Controller {
         $lottery = Lottery::findOrFail($id);
         $grades = Grade::all()->sortBy('rank');
 
-        return view('lotteries.show', compact('lottery', 'grades'));
+        return view('lotteries.show', compact('lottery', 'grades', 'id'));
     }
 
 	/**
@@ -107,16 +107,28 @@ class LotteryController extends Controller {
 		return redirect()->route('lotteries.index')->with('message', 'Item deleted successfully.');
 	}
 
-	public function confirm()
+	public function confirm(Request $request)
 	{
-		$lotteries = Lottery::orderBy('id', 'desc')->paginate(10);
+        if ($request->isMethod('post')) {
+            $quantity = $request->input('quantity');
+        }
 
-		return view('lotteries.confirm', compact('lotteries'));
+        $id = $request->input('id');
+
+        $lottery = Lottery::findOrFail($id);
+
+		return view('lotteries.confirm', compact('lottery', 'quantity', 'id'));
 	}
 
-	public function purchase()
+	public function purchase(Request $request)
 	{
-		$lotteries = Lottery::orderBy('id', 'desc')->paginate(10);
+        if ($request->isMethod('post')) {
+            $quantity = $request->input('quantity');
+        }
+
+        $objLottery = new Lottery();
+
+		$lotteries = $objLottery->draw($quantity);
 
 		return view('lotteries.purchase', compact('lotteries'));
 	}

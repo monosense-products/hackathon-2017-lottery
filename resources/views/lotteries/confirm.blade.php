@@ -16,6 +16,7 @@
 
           <form action="/lotteries/purchase" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <input type="hidden" name="quantity" value="{{ $quantity }}">
 
             <div class="panel panel-warning">
               <div class="panel-heading">
@@ -33,7 +34,7 @@
                 <h3 class="panel-title">購入内容</h3>
               </div>
               <div class="panel-body">
-                購入予定金額: ¥500 x 5枚 = ¥2,500
+                購入予定金額: {{ $lottery->lotterySpec()->first()->lot_price }} x {{ $quantity }}枚 = ¥{{ number_format($lottery->lotterySpec()->first()->lot_price * $quantity) }}
                 <br><br>
                 <span class="text-danger">(注意) 購入確定時のくじの残数によって、購入枚数が変わることがあります。ご了承ください。</span>
               </div>
@@ -80,7 +81,7 @@
             </div>
 
             <div class="col-lg-12 text-center">
-              <a href="/lotteries"><button type="button" class="btn btn-default">戻る</button></a>
+              <a href="/lotteries/{{ $id }}"><button type="button" class="btn btn-default">戻る</button></a>
               <button type="submit" class="btn btn-primary">この内容で確定する</button>
             </div>
 

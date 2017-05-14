@@ -61,6 +61,7 @@
 
             <form action="/lotteries/confirm" method="post">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input type="hidden" name="id" value="{{ $id }}">
                 <div class="col-lg-12 text-center">
                     数量：
                     <select name="quantity" class="selectpicker">

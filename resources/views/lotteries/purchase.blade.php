@@ -15,35 +15,16 @@
           <h2 class="text-center">☆ 抽選結果 ☆</h2>
           <h3 class="text-center alert alert-danger">おめでとうございます!<br><br>こちらの商品が当選しました!</h3>
 
-          <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-              <img src="/img/15.jpg" alt="" width="250" height="250">
-              <div class="caption">
-                <h4>景品1</h4>
-                <h4><span class="text-danger">残数：1</span></h4>
-              </div>
+            @foreach($lotteries as $grade)
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <img src="/img/{{ $grade->image_code }}" alt="" width="250" height="250">
+                    <div class="caption">
+                    <h4>{{ $grade->name }}</h4>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-              <img src="/img/8.jpg" alt="" width="250" height="250">
-              <div class="caption">
-                <h4>景品1</h4>
-                <h4><span class="text-danger">残数：1</span></h4>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-              <img src="/img/2.jpg" alt="" width="250" height="250">
-              <div class="caption">
-                <h4>景品1</h4>
-                <h4><span class="text-danger">残数：1</span></h4>
-              </div>
-            </div>
-          </div>
+            @endforeach
 
           <div class="col-lg-12 text-center">
             <a href="/lotteries"><button type="button" class="btn btn-primary">つづけて購入する</button></a>
