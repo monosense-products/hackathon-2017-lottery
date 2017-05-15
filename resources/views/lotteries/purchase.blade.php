@@ -12,23 +12,23 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-          <h2 class="text-center">☆ 抽選結果 ☆</h2>
-          <h3 class="text-center alert alert-danger">おめでとうございます!<br><br>こちらの商品が当選しました!</h3>
+            <h2 class="text-center">☆ 抽選結果 ☆</h2>
+            <h3 class="text-center alert alert-danger">おめでとうございます!<br><br>こちらの商品が当選しました!</h3>
 
-            @foreach($lotteries as $grade)
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="/img/{{ $grade->image_code }}" alt="" width="250" height="250">
-                    <div class="caption">
-                    <h4>{{ $grade->name }}</h4>
+            @foreach($lotteries->all() as $grade)
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="/img/{{ $grade->sku()->first()->image_code }}" alt="" width="250" height="250">
+                        <div class="caption">
+                            <h4>{{ $grade->sku()->first()->name }}</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
-          <div class="col-lg-12 text-center">
-            <a href="/lotteries"><button type="button" class="btn btn-primary">つづけて購入する</button></a>
-          </div>
+            <div class="col-lg-12 text-center">
+                <a href="/lotteries/{{ $id }}"><button type="button" class="btn btn-primary">つづけて購入する</button></a>
+            </div>
         </div>
     </div>
     <hr>

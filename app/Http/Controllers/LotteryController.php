@@ -120,17 +120,16 @@ class LotteryController extends Controller {
 		return view('lotteries.confirm', compact('lottery', 'quantity', 'id'));
 	}
 
-	public function purchase(Request $request)
-	{
+    public function purchase(Request $request)
+    {
         if ($request->isMethod('post')) {
             $quantity = $request->input('quantity');
+            $id = $request->input('id');
         }
 
-        $objLottery = new Lottery();
+        $lotteries = Lottery::findOrFail($id)->draw($quantity);
 
-		$lotteries = $objLottery->draw($quantity);
-
-		return view('lotteries.purchase', compact('lotteries'));
-	}
+        return view('lotteries.purchase', compact('lotteries', 'id'));
+    }
 
 }

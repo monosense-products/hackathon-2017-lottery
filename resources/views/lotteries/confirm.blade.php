@@ -17,6 +17,7 @@
           <form action="/lotteries/purchase" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="quantity" value="{{ $quantity }}">
+            <input type="hidden" name="id" value="{{ $id }}">
 
             <div class="panel panel-warning">
               <div class="panel-heading">
