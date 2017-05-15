@@ -27,12 +27,27 @@ class Sku extends Model
 {
     // FIXME: Sku -> SKU
 
+    protected $appends = ['quantity'];
+
+    public function getQuantityAttribute()
+    {
+        return $this->prizes()->count();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function lottery()
+    {
+        return $this->belongsTo(Lottery::class);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function grade()
     {
-        return $this->belongsTo('App\Grade');
+        return $this->belongsTo(Grade::class);
     }
 
     /**
@@ -40,7 +55,7 @@ class Sku extends Model
      */
     public function prizes()
     {
-        return $this->hasMany('App\Prize');
+        return $this->hasMany(Prize::class);
     }
 
     /**
@@ -51,6 +66,18 @@ class Sku extends Model
     {
         $relation = 'grade';
         return $query->with($relation)->whereHas($relation, function ($query) {
+            return $query->lastOnes();
+        });
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeExceptLastOnes($query)
+    {
+        $relation = 'grade';
+        return $query->with($relation)->whereDoesntHave($relation, function ($query) {
             return $query->lastOnes();
         });
     }

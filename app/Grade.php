@@ -22,6 +22,14 @@ use Illuminate\Database\Eloquent\Model;
 class Grade extends Model
 {
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function skus()
+    {
+        return $this->hasMany(Sku::class);
+    }
+
+    /**
      * @return boolean
      */
     public function is_last_one()
@@ -36,5 +44,10 @@ class Grade extends Model
     public function scopeLastOnes($query)
     {
         return $query->where('last_one_flag', true);
+    }
+
+    public function getSkusAttribute()
+    {
+        return $this->skus()->get();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\LotteryUpdated;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -25,10 +26,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Lottery extends Model
 {
+    protected $appends = ['count_to_last_one'];
+
+    public function getCountToLastOneAttribute()
+    {
+        return $this->skus()
+                    ->exceptLastOnes()
+                    ->count();
+    }
+
     /**
      * @return bool
      */
-    public function is_open()
+    public function isOpen()
     {
         return $this->status === 'open';
     }
@@ -36,7 +46,7 @@ class Lottery extends Model
     /**
      * @return bool
      */
-    public function is_close()
+    public function isClosed()
     {
         return $this->status === 'close';
     }
@@ -60,11 +70,11 @@ class Lottery extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function lotterySpec()
     {
-        return $this->hasOne('App\LotterySpec');
+        return $this->hasOne(LotterySpec::class);
     }
 
     /**
@@ -72,7 +82,7 @@ class Lottery extends Model
      */
     public function skus()
     {
-        return $this->hasMany('App\Sku');
+        return $this->hasMany(Sku::class);
     }
 
     /**
@@ -80,7 +90,7 @@ class Lottery extends Model
      */
     public function prizes()
     {
-        return $this->hasMany('App\Prize');
+        return $this->hasMany(Prize::class);
     }
 
     /**
@@ -93,7 +103,7 @@ class Lottery extends Model
         if ($n < 1) {
             throw new \InvalidArgumentException("Invalid count of lots");
         }
-        if ($this->is_close()) {
+        if ($this->isClosed()) {
             throw new \RuntimeException("Lottery already closed");
         }
 
@@ -115,6 +125,10 @@ class Lottery extends Model
             $prize->sold();
         }
         \DB::commit();
+
+        // 更新イベント発生
+        $event = new LotteryUpdated($this->id);
+        event($event);
 
         return $prizes;
     }
