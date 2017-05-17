@@ -53,7 +53,7 @@ class LotteryUpdated implements ShouldBroadcast
         $lottery = Lottery::find($lottery_id)->toArray();
         $grades  = Grade::all()->toArray();
         $skuss   = Sku::all()
-                      ->where('lottery_id', 1)
+                      ->where('lottery_id', $lottery_id)
                       ->groupBy('grade_id');
 
         foreach ($skuss as $id => $skus) {

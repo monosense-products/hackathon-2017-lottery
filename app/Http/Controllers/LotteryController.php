@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Grade;
+use App\Sku;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -56,10 +57,26 @@ class LotteryController extends Controller {
 	 */
     public function show($id)
     {
-        $lottery = Lottery::findOrFail($id);
-        $grades = Grade::all()->sortBy('rank');
+		$lottery = Lottery::find($id)->toArray();
+		$grades  = Grade::all()->toArray();
+		$skuss   = Sku::all()
+				->where('lottery_id', $id)
+				->groupBy('grade_id');
 
-        return view('lotteries.show', compact('lottery', 'grades', 'id'));
+		foreach ($skuss as $row => $skus) {
+			$i = $row - 1;
+			$grades[$i]['skus'] = $skus;
+		}
+		$lottery['grades'] = $grades;
+
+		$colors = [
+				'panel-danger',
+				'panel-success',
+				'panel-info',
+				'panel-warning',
+		];
+
+        return view('lotteries.show', compact('lottery', 'id', 'colors'));
     }
 
 	/**

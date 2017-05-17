@@ -1,0 +1,19 @@
+.soldout {
+    -webkit-filter: grayscale(1); /* Webkit */
+    filter: gray; /* IE6-9 */
+    filter: grayscale(1); /* W3C */
+    cursor: default;
+}
+
+/* Fading Effect - invisible state - */
+.fading-box {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility .5s ease-out;
+}
+
+/* Fading Effect - visible state - */
+.fading-box.visible {
+    opacity: 1;
+    visibility: visible;
+}

@@ -3,7 +3,7 @@
 @section('header')
     <div class="page-header clearfix">
         <h1>
-            <i class="glyphicon glyphicon-align-justify"></i> 一番くじ
+            <i class="glyphicon glyphicon-align-justify"></i> フィールドブック一番くじ
             <a class="btn btn-success pull-right" href="#">ログイン</a>
         </h1>
     </div>
@@ -40,7 +40,6 @@
                 <span class="text-danger">(注意) 購入確定時のくじの残数によって、購入枚数が変わることがあります。ご了承ください。</span>
               </div>
             </div>
-            <input type="hidden" name="quantity" value="5">
 
             <div class="panel panel-warning">
               <div class="panel-heading">

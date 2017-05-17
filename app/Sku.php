@@ -27,11 +27,13 @@ class Sku extends Model
 {
     // FIXME: Sku -> SKU
 
-    protected $appends = ['quantity'];
+    protected $appends = ['on_sale_count'];
 
-    public function getQuantityAttribute()
+    public function getOnSaleCountAttribute()
     {
-        return $this->prizes()->count();
+        return $this->prizes()
+                    ->onSale()
+                    ->count();
     }
 
     /**

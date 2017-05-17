@@ -26,12 +26,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Lottery extends Model
 {
-    protected $appends = ['count_to_last_one'];
+    protected $appends = ['lot_count'];
 
-    public function getCountToLastOneAttribute()
+    /**
+     * 残りくじ枚数。シリアライズ・フィールド用 getter
+     *
+     * @return int
+     */
+    public function getLotCountAttribute()
     {
-        return $this->skus()
-                    ->exceptLastOnes()
+        return $this->prizes()
+                    ->onSale()
                     ->count();
     }
 
