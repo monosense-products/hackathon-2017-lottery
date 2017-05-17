@@ -1,5 +1,7 @@
 <?php
 
+use App\Lottery;
+
 use Illuminate\Database\Seeder;
 
 // composer require laracasts/testdummy
@@ -10,12 +12,13 @@ class LotteryTableSeeder extends Seeder
 
     public function run()
     {
-        DB::table('lotteries')->insert([
+        $lottery = new Lottery([
             'name'       => 'フィールドブック一番くじ',
-            'open_time'  => new DateTime("-3d"),
-            'close_time' => new DateTime("3week"),
+            'open_time'  => new DateTimeImmutable("-3d"),
+            'close_time' => new DateTimeImmutable("3week"),
             'status'     => 'open',
         ]);
+        $lottery->save();
     }
 
 }
